@@ -1,34 +1,32 @@
 package br.pierre.rest_with_spring_boot_v1.domain;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 
 import static br.pierre.rest_with_spring_boot_v1.common.PlanetConstants.PLANET;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest(classes = PlanetService.class)
+@ExtendWith(MockitoExtension.class)
 public class PlanetServiceTest {
 
-    @Autowired
+    @InjectMocks
     private PlanetService planetService;
 
-    @MockitoBean
+   @Mock
     private PlanetRepository planetRepository;
 
     //operacao_estado_returno
     @Test
     public void creatPlanet_WithValidData_returnsPlanet() {
-        //AAA
-        //Arange
+
      when(planetRepository.save(PLANET)).thenReturn(PLANET);
 
-     //System under test
-        //Act(agir fazer a operacao que agente quer testar)
      Planet sut =  planetService.create(PLANET);
-   //Assert
      assertThat(sut).isEqualTo(PLANET);
 
     }
